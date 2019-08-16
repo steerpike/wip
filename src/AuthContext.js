@@ -4,9 +4,9 @@ const AuthContext = React.createContext()
 
 class AuthProvider extends React.Component {
     state = {
-        isAuth: false
+        isAuth: true
     }
-    login = () => {
+    login = (name,password) => {
         setTimeout(() => this.setState({ isAuth: true }), 1000)
     }
     logout = () => {

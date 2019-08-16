@@ -40,7 +40,6 @@ export default class App extends React.Component {
     let slug = getSlug(manuscript.title)+":"+manuscript.createdAt
     manuscript.slug = slug
     manuscript['_id'] = "Manuscript:"+slug
-    console.log(manuscript)
     const {manuscripts} = this.state
     this.setState({
       manuscripts: {

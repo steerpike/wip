@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default () => (
     <header>
-        <nav className="flex items-center">
+        <nav className="flex items-center bg-gray-200">
         <AuthConsumer>
             {({ isAuth, logout }) => (
                 <div className="flex flex-grow items-center">

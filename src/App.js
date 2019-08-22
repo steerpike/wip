@@ -9,6 +9,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Manuscripts from './Manuscripts/Manuscripts';
 import Manuscript from './Manuscripts/Manuscript';
 import NewManuscript from './Manuscripts/NewManuscript';
+import Document from './Documents/Document'
 
 export default class App extends React.Component {
   static contextType = AuthContext
@@ -22,13 +23,13 @@ export default class App extends React.Component {
     manuscript.updatedAt = new Date().getTime()
     let slug = getSlug(manuscript.title)+":"+manuscript.createdAt
     manuscript.slug = slug
-    manuscript['id'] = "Manuscript:"+slug
+    manuscript['_id'] = "Manuscript:"+slug
+    console.log('Manuscript not saved yet:', manuscript)
     //const {manuscripts} = this.state
     this.context.addManuscript(manuscript)
     return slug;
   }
   render() {
-  
     return (
       
       <div>
@@ -39,7 +40,8 @@ export default class App extends React.Component {
             <Switch>
               <Route path="/login" component={Login} />
               <ProtectedRoute path="/manuscripts/new" component={(props) => <NewManuscript {...props} onSave={this.handleSave } />} />
-              <ProtectedRoute path="/manuscripts/:slug" component={(props) => <Manuscript {...props} manuscript={this.context.manuscripts[props.match.params.slug]} />}  />
+              <ProtectedRoute path="/manuscripts/:slug" component={(props) => <Manuscript {...props} />}  />
+              <ProtectedRoute path="/documents/:slug" component={(props) => <Document {...props} />}  />
               <ProtectedRoute path="/manuscripts" component= {(props) => <Manuscripts {...props} manuscripts={this.context.manuscripts} />} />
               <ProtectedRoute path="/profile" component={Profile} />
               <ProtectedRoute path="/" component={Dashboard} />

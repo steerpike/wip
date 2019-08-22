@@ -6,28 +6,30 @@ const AuthContext = React.createContext()
 
 class AuthProvider extends React.Component {
     state = {
-        isAuth: false,
+        isAuth: true,
         user: {
-          username: undefined
+          username: 'brightcarvings'
         },
-        db: undefined,
+        db: new DB('brightcarvings'),
         manuscripts: {}
     }
     getManuscripts = async () => {
-      const manuscripts = await this.state.db.getAll()
+      const manuscripts = await this.state.db.getAllManuscripts()
       this.setState({
         manuscripts
       })
     }
+    
     addManuscript = async (manuscript) => {
       const response = await this.state.db.createManuscript(manuscript)
       console.log('response',response)
-      this.setState({
+      this.getManuscripts()
+      /*this.setState({
         manuscripts: {
           ...this.state.manuscripts,
           [manuscript.slug]:manuscript
         }
-      })
+      })*/
     }
     login = (name,password) => {
         setTimeout(() => this.setState({ isAuth: true }), 1000)

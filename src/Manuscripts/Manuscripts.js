@@ -4,8 +4,24 @@ import { Link } from 'react-router-dom'
 
 class Manuscripts extends Component {
     static contextType = AuthContext
+    state = {
+        manuscripts: {},
+    }
+    async componentDidMount() {
+        const db = this.context.db;
+        this._isMounted = true;
+        if(this._isMounted) {
+            let manuscripts = await db.getAllManuscripts()
+            this._isMounted && this.setState({
+                manuscripts
+            })
+        }
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+     }
     render() {
-        const manuscripts = Object.values(this.context.manuscripts)
+        const manuscripts = Object.values(this.state.manuscripts)
         return (<div>
             <h2>Manuscripts List</h2>
             { manuscripts.map((m)=>(

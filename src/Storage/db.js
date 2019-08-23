@@ -32,10 +32,19 @@ export default class DB {
         const res = await this.db.post({...document})
         return res
     }
+    async updateDocumentForManuscript(document) {
+        const res = await this.db.put({...document, _id:document._id, _rev:document._rev})
+        return res
+    }
     async getDocument(slug) {
         const item = await this.db.allDocs({startkey: "Document:"+slug,include_docs: true, limit:1});
         let document = {}
         document = item.rows[0].doc
         return document;
+    }
+    async createSession(session) {
+        const res = await this.db.put({...session})
+        console.log(res)
+        return res
     }
 }

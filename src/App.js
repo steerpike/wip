@@ -18,10 +18,11 @@ export default class App extends React.Component {
   
   }
   handleSave = (manuscript) => {
-    let getSlug = require('speakingurl');
+    //let getSlug = require('speakingurl');
     manuscript.createdAt = new Date().getTime()
     manuscript.updatedAt = new Date().getTime()
-    let slug = getSlug(manuscript.title)+":"+manuscript.createdAt
+    //let slug = getSlug(manuscript.title)+":"+manuscript.createdAt
+    let slug = manuscript.createdAt
     manuscript.slug = slug
     manuscript['_id'] = "Manuscript:"+slug
     console.log('Manuscript not saved yet:', manuscript)

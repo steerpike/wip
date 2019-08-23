@@ -34,23 +34,23 @@ export default class Manuscript extends React.Component {
     createNewDocument = async () => {
         const db = this.context.db;
         let next = this.state.documents.length + 1
-        let slug = this.state.manuscript.slug+':'+next
+        let createdAt = new Date().getTime()
+        let slug = this.state.manuscript.slug+':'+createdAt
         let id = 'Document:'+slug
-        
         let document = {
             _id: id,
             slug: slug,
-            title: '',
+            order: next,
+            title: 'Chapter '+next,
             content: '',
-            createdAt: new Date(),
+            createdAt: createdAt,
             updatedAt: new Date(),
         }
-        let result = await db.createDocumentForManuscript(document)
+        await db.createDocumentForManuscript(document)
         let documents = await db.getAllDocumentsForManuscript(this.state.manuscript)
             this._isMounted && this.setState({
                 documents
             })
-        console.log('created',result)
     }
     render() {
         const { manuscript, documents } = this.state;
@@ -64,7 +64,7 @@ export default class Manuscript extends React.Component {
                 {documents && 
                  documents.map((d)=>(
                     <div key={d._id}>
-                    <Link to={`/documents/${d.slug}`} >{d.title}{d.createdAt} </Link>
+                    <Link to={`/documents/${d.slug}`}>{d.title} </Link>
                 </div>
                     ))
                 }

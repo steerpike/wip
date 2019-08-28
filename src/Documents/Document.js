@@ -18,12 +18,14 @@ export default class Document extends React.Component {
         startTypeTime: undefined,
         currentWordCount: 0,
         currentWordMarker: 0,
-        startingWordCount: 0
+        startingWordCount: 0,
+        secondsSinceLastEdit: 0
     }
     constructor(props) {
         super(props)
         this.quillRef = null;      // Quill instance
         this.reactQuillRef = null; // ReactQuill component
+        this.intervalId = null;
     }
     async componentDidMount() {
         const db = this.context.db;
@@ -40,6 +42,12 @@ export default class Document extends React.Component {
         startingWords = startingWords.trim()
         let startingWordCount = startingWords.length > 0 ? startingWords.split(/\s+/).length : 0;
         this.setState({startingWordCount:startingWordCount, currentWordMarker:startingWordCount})
+        this.intervalId = setInterval(()=> {
+            this.setState({secondsSinceLastEdit:this.state.secondsSinceLastEdit+1})
+        }, 1000)
+    }
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
     }
     componentDidUpdate() {
         this.attachQuillRefs()
@@ -64,10 +72,12 @@ export default class Document extends React.Component {
         //newContent = this.quillRef.getContents()
         words = words.trim()
         let wordCount = words.length > 0 ? words.split(/\s+/).length : 0;
+        let updatedAt = new Date().getTime()
         this.setState(prevState => ({
                 document: {
                 ...prevState.document,
-                content:content
+                content:content,
+                updatedAt: updatedAt
             },
             currentWordCount: wordCount
         }));
@@ -89,11 +99,14 @@ export default class Document extends React.Component {
         const db = this.context.db;
         try {
         let result = await db.updateDocumentForManuscript(this.state.document)
-        this.setState(prevState => ({
-            document: {
-            ...prevState.document,
-            _rev:result.rev
-        }}));
+        this.setState(prevState => (
+            {
+                document: {
+                ...prevState.document,
+                _rev:result.rev
+                },
+                secondsSinceLastEdit:0
+            }));
         } catch(e) {
             console.log('updating too quickly', e)
         }
@@ -102,13 +115,16 @@ export default class Document extends React.Component {
         const { document } = this.state
         if(!document) { return null;}
         return (
-            <div>
+            <div className="max-w-md mx-auto sm:max-w-xl">
                 <h4>{document.createdAt}</h4>
-                <input type="text" name="title" defaultValue={document.title} onChange={this.updateTitle} />
+                <p>Seconds since last edit:{this.state.secondsSinceLastEdit}</p>
+                <input type="text" name="title"
+                className="w-full"
+                defaultValue={document.title} onChange={this.updateTitle} />
                 <Session values={this.state}/>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
-                    className="min-h-screen border reactQuill"
+                    className="min-h-screen w-full border-4 reactQuill"
                     theme="bubble"
                     value={document.content}
                     onChange={this.updateContent}

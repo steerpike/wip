@@ -25,8 +25,6 @@ export default class App extends React.Component {
     let slug = manuscript.createdAt
     manuscript.slug = slug
     manuscript['_id'] = "Manuscript:"+slug
-    console.log('Manuscript not saved yet:', manuscript)
-    //const {manuscripts} = this.state
     this.context.addManuscript(manuscript)
     return slug;
   }

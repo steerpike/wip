@@ -44,7 +44,7 @@ export default class Manuscript extends React.Component {
             title: 'Chapter '+next,
             content: '',
             createdAt: createdAt,
-            updatedAt: new Date(),
+            updatedAt: new Date().getTime(),
         }
         await db.createDocumentForManuscript(document)
         let documents = await db.getAllDocumentsForManuscript(this.state.manuscript)

@@ -15,7 +15,7 @@ export default class App extends React.Component {
   static contextType = AuthContext
                                                                                                      
   async componentDidMount() {
-  
+    
   }
   handleSave = (manuscript) => {
     //let getSlug = require('speakingurl');

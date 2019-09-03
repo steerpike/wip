@@ -7,10 +7,11 @@ const AuthContext = React.createContext()
 class AuthProvider extends React.Component {
     state = {
         isAuth: true,
+        isAnonymous: true,
         user: {
-          username: 'brightcarvings'
+          username: 'Anonymous'
         },
-        db: new DB('brightcarvings'),
+        db: new DB('anonymous'),
         manuscripts: {}
     }
     getManuscripts = async () => {
@@ -24,39 +25,42 @@ class AuthProvider extends React.Component {
       const response = await this.state.db.createManuscript(manuscript)
       console.log('response',response)
       this.getManuscripts()
-      /*this.setState({
-        manuscripts: {
-          ...this.state.manuscripts,
-          [manuscript.slug]:manuscript
-        }
-      })*/
+     
     }
     login = (name,password) => {
-        setTimeout(() => this.setState({ isAuth: true }), 1000)
+        //setTimeout(() => this.setState({ isAuth: true }), 1000)
         this.setState({
           ...this.state,
+          isAuth: true,
+          isAnonymous: false,
           user: {
-            username:'brightcarvings'
+            username: name
           },
-          db:new DB('brightcarvings')
-        }, () => this.getManuscripts())
+          db:new DB(name)
+        })
         
     }
     logout = () => {
-        this.setState({ isAuth: false })
+        this.setState({ isAuth: true, 
+          isAnonymous: true,
+          user: {
+            username: 'Anonymous'
+          } 
+        })
     }
     render() { 
       return (
           <AuthContext.Provider
             value={{
               isAuth: this.state.isAuth,
+              isAnonymous: this.state.isAnonymous,
               login: this.login,
               logout: this.logout,
               updateManuscripts: this.updateManuscripts,
               addManuscript: this.addManuscript,
               user: this.state.user,
               db: this.state.db,
-              manuscripts: this.state.manuscripts
+              manuscripts: this.state.manuscripts,
             }}
           >
             {this.props.children}

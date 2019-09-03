@@ -6,15 +6,21 @@ const Login = () => (
   <div>
     <h2>Login Page</h2>
     <AuthConsumer>
-            {({ isAuth, login }) => (
+            {({ isAnonymous, login, user }) => (
                 <div>
-                {!isAuth ? (
+                {isAnonymous ? (
                     <div>
                     <label>Username</label>
-                    <input type="text" id="username" />
+                    <input 
+                    data-test="username"
+                    type="text" id="username" />
                     <label> Password</label>
-                    <input type="password" id="password" />
-                    <button onClick={() => {login(document.getElementById('username').value, document.getElementById('password').value)}}>login</button>
+                    <input 
+                    data-test="password"
+                    type="password" id="password" />
+                    <button 
+                    data-test="loginButton"
+                    onClick={() => {login(document.getElementById('username').value, document.getElementById('password').value)}}>login</button>
                     </div>
                 ):(<Redirect to="/"/>)}
                 </div>

@@ -6,7 +6,7 @@ export default () => (
     <header>
         <nav className="flex items-center bg-gray-200">
         <AuthConsumer>
-            {({ isAuth, logout }) => (
+            {({ isAuth, logout, user }) => (
                 <div className="flex flex-grow items-center">
                     <h3>
                         <Link to="/">
@@ -19,11 +19,15 @@ export default () => (
                             <Link to="/profile" className="py-2 px-4 items-center">
                                 Profile
                             </Link>
-                            <Link to="/manuscripts" className="py-2 px-4 items-center">
+                            <Link 
+                            data-test="manuscriptsLink"
+                            to="/manuscripts" className="py-2 px-4 items-center">
                                 Manuscripts
                             </Link>
                         </div>
-                        <button onClick={logout} className="py-2 px-4 flex items-center">Logout</button>
+                        <button 
+                        data-test="logoutButton"
+                        onClick={logout} className="py-2 px-4 flex items-center">Logout {user.username}</button>
                     </div>       
                 }
             </div>

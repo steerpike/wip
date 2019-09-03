@@ -68,7 +68,9 @@ export default class Manuscript extends React.Component {
                 </div>
                     ))
                 }
-                <button onClick={this.createNewDocument}>Add new document</button>
+                <button 
+                data-test="createNewDocumentButton"
+                onClick={this.createNewDocument}>Add new document</button>
             </div>
         )
     }

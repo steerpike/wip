@@ -29,7 +29,9 @@ class Manuscripts extends Component {
                     <Link to={`/manuscripts/${m.slug}`} >{m.title}</Link>
                 </div>))}
                 <div>
-                <Link to="/manuscripts/new" key="new">New Manuscript</Link>
+                <Link 
+                data-test="newManuscriptsLink"
+                to="/manuscripts/new" key="new">New Manuscript</Link>
                 </div>
         </div>)
     }

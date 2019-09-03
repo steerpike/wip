@@ -30,13 +30,18 @@ export default class NewManuscript extends React.Component {
                 <form onSubmit={this.handleSave}>
                     <div>
                         <label>Title</label>
-                        <input type="text" name="title" value={manuscript.title} onChange={this.updateValue} />
+                        <input type="text" name="title" 
+                        data-test="createNewManuscriptTitle"
+                        value={manuscript.title} onChange={this.updateValue} />
                     </div>
                     <div>
                         <label>Content</label>
-                        <textarea type="text" name="content" value={manuscript.content} onChange={this.updateValue} />
+                        <textarea 
+                        type="text" name="content" 
+                        data-test="createNewManuscriptContent"
+                        value={manuscript.content} onChange={this.updateValue} />
                     </div>
-                    <button>Submit</button>
+                    <button data-test="createNewManuscriptButton">Submit</button>
                 </form>
             </div>
         )

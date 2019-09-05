@@ -4,6 +4,10 @@ export default class DB {
     constructor(name) {
         this.db = new PouchDb(name)
     }
+    async deleteDatabase() {
+        const result = await this.db.destroy();
+        return result;
+    }
     async getAllManuscripts() {
         let allItems = await this.db.allDocs({startkey: "Manuscript:", endkey: "Manuscript:\ufff0",include_docs: true});
         let manuscripts = {};

@@ -5,11 +5,12 @@ export default class Manuscript extends React.Component {
     static contextType = AuthContext
     async componentWillUnmount() {
         const db = this.context.db;
-        let {words, startingWordCount, started, openTime, startTypeTime} = this.props.values;
+        let {currentWordCount, startingWordCount, started, openTime, startTypeTime, document} = this.props.values;
         if(started === true) {
+            console.log(document._id)
             let session = {
                 _id:"Session:"+openTime.getTime(),
-                words: words,
+                currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
                 started: started,
                 startTypeTime: startTypeTime

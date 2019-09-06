@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthContext } from '../AuthContext'
 import ReactQuill from 'react-quill';
 import Session from '../Sessions/Session'
+import Spike from '../Spikes/Spike.js'
 
 import 'react-quill/dist/quill.core.css';
 import 'react-quill/dist/quill.bubble.css'; 
@@ -122,6 +123,7 @@ export default class Document extends React.Component {
                 className="w-full"
                 defaultValue={document.title} onChange={this.updateTitle} />
                 <Session values={this.state}/>
+                <Spike values={this.state}/>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     className="min-h-screen w-full border-4 reactQuill"

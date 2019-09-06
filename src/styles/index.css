@@ -1,5 +1,39 @@
 @tailwind base;
 
 @tailwind components;
-  
+
+/*
+h1 { @apply text-5xl; }
+h2 { @apply text-4xl; }
+h3 { @apply text-3xl; }
+h4 { @apply text-2xl; }
+h5 { @apply text-xl; }
+h6 { @apply text-lg; }
+
+
+a { @apply text-blue-600; }
+a:hover { @apply text-blue-400; }
+
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    @apply inline-block, border-solid, border-gray-400;
+
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+
+}
+*/
 @tailwind utilities;

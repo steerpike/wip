@@ -48,7 +48,10 @@ export default class DB {
     }
     async createSession(session) {
         const res = await this.db.put({...session})
-        console.log(res)
+        return res
+    }
+    async createSpike(spike) {
+        const res = await this.db.put({...spike})
         return res
     }
 }

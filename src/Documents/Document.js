@@ -114,14 +114,16 @@ export default class Document extends React.Component {
     }
     render() {
         const { document } = this.state
+        
         if(!document) { return null;}
+        const created = new Date(document.createdAt).toString()
         return (
             <div>
                 <div className="grid grid-cols">
                     <Session values={this.state} />
                     <Sprint values={this.state} />
                 </div>
-                <h4>{document.createdAt}</h4>
+                <h4>{ created }</h4>
                 <p>Seconds since last edit:{this.state.secondsSinceLastEdit}</p>
                 <input type="text" name="title"
                 className="w-full my-2 p-1"

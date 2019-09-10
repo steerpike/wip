@@ -12,19 +12,9 @@ export default class Sprint extends React.Component {
     async componentWillUnmount() {
         this.endSprint();
     }
-    saveSprint = async () => {
+    saveSprint = async (sprint) => {
         const db = this.context.db;
-        let {words, startingWordCount, openTime, startTypeTime} = this.props.values;
-        let sprint = {
-            _id:"Sprint:"+openTime.getTime(),
-            words: words,
-            startingWordCount: startingWordCount,
-            startTime: this.state.startTime,
-            startTypeTime: startTypeTime,
-            targetGoal: this.state.targetGoal,
-            currentTargetValue: this.state.currentTargetValue,
-            completed: this.state.completed,
-        }
+        
         await db.createSprint(sprint)
     }
     createNewSprint = async (goal) => {
@@ -51,12 +41,24 @@ export default class Sprint extends React.Component {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
         if(this.state.startTime != null) {
+            let { words, startingWordCount, openTime, startTypeTime } = this.props.values;
+            let sprint = {
+                _id: "Sprint:" + openTime.getTime(),
+                words: words,
+                startingWordCount: startingWordCount,
+                startTime: this.state.startTime,
+                startTypeTime: startTypeTime,
+                targetGoal: this.state.targetGoal,
+                currentTargetValue: this.state.currentTargetValue,
+                completed: this.state.completed,
+            }
+            await this.saveSprint(sprint)
             this.setState({
                 startTime: null,
                 targetGoal: 0,
                 currentTargetValue: 0,
                 completed: false
-            }, await this.saveSprint())
+            })
         }
         
     }

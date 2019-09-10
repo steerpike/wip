@@ -2,7 +2,7 @@
 
 @tailwind components;
 
-/*
+
 h1 { @apply text-5xl; }
 h2 { @apply text-4xl; }
 h3 { @apply text-3xl; }
@@ -20,8 +20,7 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-    @apply inline-block, border-solid, border-gray-400;
-
+    @apply border border-gray-400 p-1;
 }
 
 input[type="email"],
@@ -33,7 +32,19 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
-
+    @apply  w-full border border-gray-400;
 }
-*/
+textarea {
+  @apply w-full border border-gray-400 py-2;
+}
+
+.grid {
+    display: grid;
+}
+.inline-grid {
+    display: inline-grid;
+}
+.grid-cols {
+    grid-template-columns: 1fr 1fr;
+}
 @tailwind utilities;

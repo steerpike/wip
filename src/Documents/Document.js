@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthContext } from '../AuthContext'
 import ReactQuill from 'react-quill';
 import Session from '../Sessions/Session'
-import Spike from '../Spikes/Spike.js'
+import Sprint from '../Sprints/Sprint.js'
 
 import 'react-quill/dist/quill.core.css';
 import 'react-quill/dist/quill.bubble.css'; 
@@ -116,17 +116,19 @@ export default class Document extends React.Component {
         const { document } = this.state
         if(!document) { return null;}
         return (
-            <div className="max-w-md mx-auto sm:max-w-xl">
+            <div>
+                <div className="grid grid-cols">
+                    <Session values={this.state} />
+                    <Sprint values={this.state} />
+                </div>
                 <h4>{document.createdAt}</h4>
                 <p>Seconds since last edit:{this.state.secondsSinceLastEdit}</p>
                 <input type="text" name="title"
-                className="w-full"
+                className="w-full my-2 p-1"
                 defaultValue={document.title} onChange={this.updateTitle} />
-                <Session values={this.state}/>
-                <Spike values={this.state}/>
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
-                    className="min-h-screen w-full border-4 reactQuill"
+                    className="min-h-screen w-full border-2 reactQuill"
                     theme="bubble"
                     value={document.content}
                     onChange={this.updateContent}

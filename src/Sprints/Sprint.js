@@ -1,7 +1,7 @@
 import React from 'react'
 import { AuthContext } from '../AuthContext'
 
-export default class Spike extends React.Component {
+export default class Sprint extends React.Component {
     static contextType = AuthContext
     state = {
         startTime: null,
@@ -10,13 +10,13 @@ export default class Spike extends React.Component {
         completed: false
     }
     async componentWillUnmount() {
-        this.endSpike();
+        this.endSprint();
     }
-    saveSpike = async () => {
+    saveSprint = async () => {
         const db = this.context.db;
         let {words, startingWordCount, openTime, startTypeTime} = this.props.values;
-        let spike = {
-            _id:"Spike:"+openTime.getTime(),
+        let sprint = {
+            _id:"Sprint:"+openTime.getTime(),
             words: words,
             startingWordCount: startingWordCount,
             startTime: this.state.startTime,
@@ -25,15 +25,15 @@ export default class Spike extends React.Component {
             currentTargetValue: this.state.currentTargetValue,
             completed: this.state.completed,
         }
-        await db.createSpike(spike)
+        await db.createSprint(sprint)
     }
-    createNewSpike = async (goal) => {
+    createNewSprint = async (goal) => {
         this.setState({
             startTime: new Date().getTime(),
             targetGoal: goal
-        }, this.startSpike())
+        }, this.startSprint())
     }
-    startSpike = () => {
+    startSprint = () => {
         this.loadInterval = setInterval(() => {
             
             if(this.state.currentTargetValue < this.state.targetGoal*60) {
@@ -43,11 +43,11 @@ export default class Spike extends React.Component {
             } else {
                 this.setState(prevState => ({
                     completed: true
-                }), this.endSpike())
+                }), () => this.endSprint())
             }
         }, 1000)
     }
-    endSpike = async () => {
+    endSprint = async () => {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
         if(this.state.startTime != null) {
@@ -56,7 +56,7 @@ export default class Spike extends React.Component {
                 targetGoal: 0,
                 currentTargetValue: 0,
                 completed: false
-            }, await this.saveSpike())
+            }, await this.saveSprint())
         }
         
     }
@@ -66,16 +66,17 @@ export default class Spike extends React.Component {
         
         return  (
         <div>
-            <h3>Select a writing goal</h3>
+            <h3>Current Sprint</h3>
             <p>Started: {startTime}</p>
             <p>Target: {targetGoal}</p>
             <p>Current: {currentTargetValue}</p>
             <p>Completed: {completed}</p>
-            <button onClick={() => this.createNewSpike(10)}>10 minutes</button>
-            <button onClick={() => this.createNewSpike(20)}>20 minutes</button>
-            <button onClick={() => this.createNewSpike(30)}>30 minutes</button>
-            <button onClick={() => this.createNewSpike(60)}>60 minutes</button>
-            <button onClick={() => this.createNewSpike(120)}>120 minutes</button>
+            <button onClick={() => this.createNewSprint(1)}>1 minute</button>
+            <button onClick={() => this.createNewSprint(10)}>10 minutes</button>
+            <button onClick={() => this.createNewSprint(20)}>20 minutes</button>
+            <button onClick={() => this.createNewSprint(30)}>30 minutes</button>
+            <button onClick={() => this.createNewSprint(60)}>60 minutes</button>
+            <button onClick={() => this.createNewSprint(120)}>120 minutes</button>
         </div>)
     }
   

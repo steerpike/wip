@@ -27,7 +27,7 @@ export default class Manuscript extends React.Component {
         }
         return  (
         <div>
-            <p>Session</p>
+            <h3>Current Session</h3>
             <p>Starting word count: { startingWordCount }</p>
             <p>Current word count: { currentWordCount }</p>
             <p>Begun typing: {started.toString()}</p>

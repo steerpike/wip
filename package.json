@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
-    "watch:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css -w",
+    "watch:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css -watch",
     "css": "postcss src/styles/index.css -o src/styles/tailwind.css -w",
     "start": "react-scripts start",
     "build": "react-scripts build",

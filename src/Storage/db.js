@@ -50,8 +50,8 @@ export default class DB {
         const res = await this.db.put({...session})
         return res
     }
-    async createSpike(spike) {
-        const res = await this.db.put({...spike})
+    async createSprint(sprint) {
+        const res = await this.db.put({...sprint})
         return res
     }
 }

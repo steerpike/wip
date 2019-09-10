@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/tailwind.css';
-import './styles/base.css';
+//import './styles/base.css';
 import App from './App';
 import { AuthProvider } from './AuthContext'
 import * as serviceWorker from './serviceWorker';

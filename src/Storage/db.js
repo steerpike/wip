@@ -15,7 +15,7 @@ export default class DB {
         return manuscripts;
     }
     async createManuscript(manuscript) {
-        const res = await this.db.post({...manuscript})
+        const res = await this.db.put({...manuscript})
         return res
     }
     async getManuscript(slug) {
@@ -33,7 +33,7 @@ export default class DB {
         return docs;
     }
     async createDocumentForManuscript(document) {
-        const res = await this.db.post({...document})
+        const res = await this.db.put({...document})
         return res
     }
     async updateDocumentForManuscript(document) {
@@ -53,5 +53,17 @@ export default class DB {
     async createSprint(sprint) {
         const res = await this.db.put({...sprint})
         return res
+    }
+    async getAllSessions() {
+        let allItems = await this.db.allDocs({startkey: "Session:", endkey: "Session:\ufff0",include_docs: true});
+        let sessions = {};
+        allItems.rows.forEach(i => sessions[i.id] = i.doc);
+        return sessions;
+    }
+    async getAllSprints() {
+        let allItems = await this.db.allDocs({startkey: "Sprint:", endkey: "Sprint:\ufff0",include_docs: true});
+        let sprints = {};
+        allItems.rows.forEach(i => sprints[i.id] = i.doc);
+        return sprints;
     }
 }

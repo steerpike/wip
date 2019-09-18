@@ -7,12 +7,13 @@ export default class Manuscript extends React.Component {
         const db = this.context.db;
         let {currentWordCount, startingWordCount, started, openTime, startTypeTime, document} = this.props.values;
         if(started === true) {
-            console.log(document._id)
             let session = {
-                _id:"Session:"+openTime.getTime(),
+                _id:"Session:"+document.slug+"-"+openTime.getTime(),
                 currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
+                opened: openTime,
                 started: started,
+                finished: new Date(),
                 startTypeTime: startTypeTime
             }
             await db.createSession(session)

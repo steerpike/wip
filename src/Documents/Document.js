@@ -47,8 +47,10 @@ export default class Document extends React.Component {
             this.setState({secondsSinceLastEdit:this.state.secondsSinceLastEdit+1})
         }, 1000)
     }
-    componentWillUnmount() {
+    async componentWillUnmount() {
+        const db = this.context.db;
         clearInterval(this.intervalId);
+        await db.updateDocumentForManuscript(this.state.document)
     }
     componentDidUpdate() {
         this.attachQuillRefs()

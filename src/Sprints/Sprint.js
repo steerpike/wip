@@ -41,10 +41,11 @@ export default class Sprint extends React.Component {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
         if(this.state.startTime != null) {
-            let { words, startingWordCount, openTime, startTypeTime } = this.props.values;
+            let { words, startingWordCount, openTime, startTypeTime, document, currentWordCount } = this.props.values;
             let sprint = {
-                _id: "Sprint:" + openTime.getTime(),
+                _id: "Sprint:"+document.slug+"-"+ + openTime.getTime(),
                 words: words,
+                currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
                 startTime: this.state.startTime,
                 startTypeTime: startTypeTime,
@@ -65,7 +66,6 @@ export default class Sprint extends React.Component {
     render() {
         
         let {targetGoal, currentTargetValue, startTime, completed} = this.state;
-        
         return  (
         <div>
             <h3>Current Sprint</h3>

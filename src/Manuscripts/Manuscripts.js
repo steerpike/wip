@@ -19,7 +19,7 @@ class Manuscripts extends Component {
     }
     componentWillUnmount() {
         this._isMounted = false;
-     }
+    }
     render() {
         const manuscripts = Object.values(this.state.manuscripts)
         return (<div>

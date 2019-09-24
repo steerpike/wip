@@ -23,15 +23,24 @@ export default class Sessions extends React.Component {
     return (
       <div>
         <h2>Recent Sessions</h2>
+        <table className="w-full border">
+        <tr className="border-b">
+          <td>Opened</td>
+          <td>Began typing</td>
+          <td>Finished</td>
+          <td>Time</td>
+          <td>Total words</td>
+        </tr>
         { sessions.map((s)=>(
-          <div key={s._id}>
-          Opened: {moment(s.opened).calendar()} 
-          Began typing: {moment(s.startTypeTime).format('h:mm:ss')} 
-          Finished: {moment(s.finished).format('h:mm:ss')} 
-          Time: {parseInt(moment.duration(moment(s.finished).diff(moment(s.startTypeTime))).asMinutes())}
-          Written words: {s.currentWordCount - s.startingWordCount}
-          </div>
+          <tr key={s._id}>
+          <td>{moment(s.opened).calendar()}</td>
+          <td>{moment(s.startTypeTime).format('h:mm:ss')}</td>
+          <td>{moment(s.finished).format('h:mm:ss')}</td>
+          <td>{parseInt(moment.duration(moment(s.finished).diff(moment(s.startTypeTime))).asMinutes())}</td>
+          <td>{s.currentWordCount - s.startingWordCount}</td>
+          </tr>
         ))}
+        </table>
       </div>
   )
   }

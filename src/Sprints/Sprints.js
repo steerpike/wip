@@ -22,13 +22,13 @@ export default class Sprints extends React.Component {
     const sprints = Object.values(this.state.sprints)
     return (<div>
       <h2>Recent Sprints</h2>
-      <table>
-        <th>
+      <table className="w-full border">
+        <tr className="border-b">
           <td>Date</td>
           <td>Goal</td>
-          <td>Word completed</td>
+          <td>Words completed</td>
           <td>Sprint finished?</td>
-        </th>
+        </tr>
       { sprints.map((s)=>(
           <tr key={s._id}>
           <td>{moment(s.startTime).calendar()}</td>

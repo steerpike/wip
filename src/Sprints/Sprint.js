@@ -43,10 +43,12 @@ export default class Sprint extends React.Component {
         if(this.state.startTime != null) {
             let { words, startingWordCount, openTime, startTypeTime, document, currentWordCount } = this.props.values;
             let sprint = {
-                _id: "Sprint:"+document.slug+"-"+ + openTime.getTime(),
+                _id: "Sprint:" + openTime.getTime(),
                 words: words,
                 currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
+                documentId: document._id,
+                documentSlug: document.slug,
                 startTime: this.state.startTime,
                 startTypeTime: startTypeTime,
                 targetGoal: this.state.targetGoal,

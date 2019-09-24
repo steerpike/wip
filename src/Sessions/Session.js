@@ -8,9 +8,11 @@ export default class Manuscript extends React.Component {
         let {currentWordCount, startingWordCount, started, openTime, startTypeTime, document} = this.props.values;
         if(started === true) {
             let session = {
-                _id:"Session:"+document.slug+"-"+openTime.getTime(),
+                _id:"Session:"+openTime.getTime(),
                 currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
+                documentId: document._id,
+                documentSlug: document.slug,
                 opened: openTime,
                 started: started,
                 finished: new Date(),

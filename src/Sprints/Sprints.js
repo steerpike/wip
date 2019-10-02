@@ -23,8 +23,10 @@ export default class Sprints extends React.Component {
     return (<div>
       <h2>Recent Sprints</h2>
       <table className="w-full border">
+        <tbody>
         <tr className="border-b">
           <td>Date</td>
+          <td>Document</td>
           <td>Goal</td>
           <td>Words completed</td>
           <td>Sprint finished?</td>
@@ -32,11 +34,13 @@ export default class Sprints extends React.Component {
       { sprints.map((s)=>(
           <tr key={s._id}>
           <td>{moment(s.startTime).calendar()}</td>
+          <td>{s.documentSlug}</td>
           <td>{s.targetGoal}</td>
           <td>{s.currentWordCount - s.startingWordCount}</td>
           <td>{s.completed?'Completed':'Incomplete'}</td>
           </tr>
         ))}
+        </tbody>
       </table>
       </div>
   )

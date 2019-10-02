@@ -6,7 +6,7 @@ export default () => (
     <header>
         <nav className="flex items-center bg-gray-200">
         <AuthConsumer>
-            {({ isAuth, logout, user }) => (
+            {({ isAuth, logout, user, isAnonymous }) => (
                 <div className="flex flex-grow items-center">
                     <h3>
                         <Link to="/">
@@ -16,18 +16,24 @@ export default () => (
                 {isAuth &&
                     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                         <div className="lg:flex-grow">
-                            <Link to="/profile" className="py-2 px-4 items-center">
+                            <Link to="/profile" className="pt-2 px-4 items-center">
                                 Profile
                             </Link>
                             <Link 
                             data-test="manuscriptsLink"
-                            to="/manuscripts" className="py-2 px-4 items-center">
+                            to="/manuscripts" className="pt-2 px-4 items-center">
                                 Manuscripts
                             </Link>
+                            {isAnonymous && 
+                            <Link 
+                            to="/login" className="pt-2 px-4 items-center">
+                                Login
+                            </Link>
+                            }
                         </div>
                         <button 
                         data-test="logoutButton"
-                        onClick={logout} className="py-2 px-4 flex items-center">Logout {user.username}</button>
+                        onClick={logout} className="py-2 px-4 flex items-center">Hello {user.username}</button>
                     </div>       
                 }
             </div>

@@ -17,15 +17,15 @@ export default class App extends React.Component {
   async componentDidMount() {
     
   }
-  handleSave = (manuscript) => {
+  handleSave = async (manuscript) => {
     //let getSlug = require('speakingurl');
+    const db = this.context.db;
     manuscript.createdAt = new Date().getTime()
     manuscript.updatedAt = new Date().getTime()
-    //let slug = getSlug(manuscript.title)+":"+manuscript.createdAt
     let slug = manuscript.createdAt
     manuscript.slug = slug
     manuscript['_id'] = "Manuscript:"+slug
-    this.context.addManuscript(manuscript)
+    await db.createManuscript(manuscript)
     return slug;
   }
   render() {
@@ -34,13 +34,13 @@ export default class App extends React.Component {
       <div>
           <Router>
           <Header />
-          <div className="container mx-auto max-w-md mx-auto sm:max-w-xl">
+          <div className="container mx-auto bg-gray-100">
             <Switch>
               <Route path="/login" component={Login} />
               <ProtectedRoute path="/manuscripts/new" component={(props) => <NewManuscript {...props} onSave={this.handleSave } />} />
               <ProtectedRoute path="/manuscripts/:slug" component={(props) => <Manuscript {...props} />}  />
               <ProtectedRoute path="/documents/:slug" component={(props) => <Document {...props} />}  />
-              <ProtectedRoute path="/manuscripts" component= {(props) => <Manuscripts {...props} manuscripts={this.context.manuscripts} />} />
+              <ProtectedRoute path="/manuscripts" component= {(props) => <Manuscripts {...props} />} />
               <ProtectedRoute path="/profile" component={Profile} />
               <ProtectedRoute path="/" component={Dashboard} />
             </Switch>

@@ -24,8 +24,10 @@ export default class Sessions extends React.Component {
       <div>
         <h2>Recent Sessions</h2>
         <table className="w-full border">
+          <tbody>
         <tr className="border-b">
           <td>Opened</td>
+          <td>Document</td>
           <td>Began typing</td>
           <td>Finished</td>
           <td>Time</td>
@@ -34,12 +36,14 @@ export default class Sessions extends React.Component {
         { sessions.map((s)=>(
           <tr key={s._id}>
           <td>{moment(s.opened).calendar()}</td>
+          <td>{s.documentSlug}</td>
           <td>{moment(s.startTypeTime).format('h:mm:ss')}</td>
           <td>{moment(s.finished).format('h:mm:ss')}</td>
           <td>{parseInt(moment.duration(moment(s.finished).diff(moment(s.startTypeTime))).asMinutes())}</td>
           <td>{s.currentWordCount - s.startingWordCount}</td>
           </tr>
         ))}
+        </tbody>
         </table>
       </div>
   )

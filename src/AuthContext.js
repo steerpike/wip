@@ -1,5 +1,6 @@
 import React from 'react'
 import DB from './Storage/db'
+import { auth } from './Storage/firebase'
 
 
 const AuthContext = React.createContext()
@@ -11,42 +12,37 @@ class AuthProvider extends React.Component {
         user: {
           username: 'Anonymous'
         },
-        db: new DB('anonymous'),
-        manuscripts: {}
+        db: new DB('Anonymous'),
+        error: null
     }
-    getManuscripts = async () => {
-      const manuscripts = await this.state.db.getAllManuscripts()
-      this.setState({
-        manuscripts
-      })
-    }
-    
-    addManuscript = async (manuscript) => {
-      const response = await this.state.db.createManuscript(manuscript)
-      console.log('response',response)
-      this.getManuscripts()
-     
-    }
-    login = (name,password) => {
-        //setTimeout(() => this.setState({ isAuth: true }), 1000)
+    constructor(props) {
+      super(props)
+      auth.onAuthStateChanged(function (user) { 
+        let name = user?user.email:'Anonymous'
+        let anonymous = user?false:true
         this.setState({
           ...this.state,
-          isAuth: true,
-          isAnonymous: false,
+          isAnonymous: anonymous,
           user: {
             username: name
           },
           db:new DB(name)
         })
-        
+      }.bind(this))
+    }
+    
+    login = (name,password) => {
+      auth.signInWithEmailAndPassword(name, password).catch((error) =>{
+        this.setState({error: error.message})
+      })    
+    }
+    register = (name,password) => {
+      auth.createUserWithEmailAndPassword(name, password).catch((error) =>{
+        this.setState({error: error.message})
+      })    
     }
     logout = () => {
-        this.setState({ isAuth: true, 
-          isAnonymous: true,
-          user: {
-            username: 'Anonymous'
-          } 
-        })
+      auth.signOut()
     }
     render() { 
       return (
@@ -55,12 +51,11 @@ class AuthProvider extends React.Component {
               isAuth: this.state.isAuth,
               isAnonymous: this.state.isAnonymous,
               login: this.login,
+              register: this.register,
               logout: this.logout,
-              updateManuscripts: this.updateManuscripts,
-              addManuscript: this.addManuscript,
               user: this.state.user,
               db: this.state.db,
-              manuscripts: this.state.manuscripts,
+              error: this.state.error
             }}
           >
             {this.props.children}

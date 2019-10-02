@@ -631,6 +631,19 @@ video {
   }
 }
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #1a202c;
+}
+
+h1, h2 h3, h4, h5 {
+  font-family: 'Merriweather', serif;
+}
+
 h1 { font-size: 3rem;
 }
 
@@ -649,10 +662,10 @@ h5 { font-size: 1.25rem;
 h6 { font-size: 1.125rem;
 }
 
-a { color: #3182ce;
+a { color: #2d3748;
 }
 
-a:hover { color: #63b3ed;
+a:hover { color: #718096; border-bottom-width: 1px; border-color: #718096;
 }
 
 .button,
@@ -697,6 +710,11 @@ textarea {
 
 .grid-cols {
   grid-template-columns: 1fr 1fr;
+}
+
+.ql-editor {
+  font-size: 1.125rem;
+  color: #2d3748;
 }
 
 .sr-only {

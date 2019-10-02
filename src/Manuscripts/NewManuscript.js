@@ -17,9 +17,9 @@ export default class NewManuscript extends React.Component {
             manuscript : {...manuscript, [e.target.name]:e.target.value}
         })
     }
-    handleSave = (e) => {
+    handleSave = async (e) => {
         e.preventDefault();
-        const slug = this.props.onSave(this.state.manuscript)
+        const slug = await this.props.onSave(this.state.manuscript)
         this.props.history.replace(`/manuscripts/${slug}`)
     }
     render() {

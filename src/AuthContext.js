@@ -1,5 +1,6 @@
 import React from 'react'
 import DB from './Storage/db'
+import PouchDB from 'pouchdb'
 import { auth } from './Storage/firebase'
 
 
@@ -27,6 +28,12 @@ class AuthProvider extends React.Component {
             username: name
           },
           db:new DB(name)
+        }, () => {
+          /*let remoteRB = new PouchDB('http://hallofbrightcarvings.com.au:5984/test')
+          let info = remoteRB.info()
+          console.log(info)
+          this.state.db.sync(remoteRB)
+          console.log('syncing', remoteRB)*/
         })
       }.bind(this))
     }

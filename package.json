@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "add-cors-to-couchdb": "^0.0.6",
     "autoprefixer": "^9.6.1",
     "cypress": "^3.4.1",
     "firebase": "^7.0.0",

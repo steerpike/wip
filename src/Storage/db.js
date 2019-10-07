@@ -4,6 +4,9 @@ export default class DB {
     constructor(name) {
         this.db = new PouchDb(name)
     }
+    sync(remoteDB) {
+        this.db.sync(remoteDB)
+    }
     async deleteDatabase() {
         const result = await this.db.destroy();
         return result;

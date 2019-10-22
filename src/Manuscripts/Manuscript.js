@@ -37,10 +37,12 @@ export default class Manuscript extends React.Component {
         let createdAt = new Date().getTime()
         let slug = this.state.manuscript.slug+':'+createdAt
         let id = 'Document:'+slug
+        let user = this.context.user.username;
         let document = {
             _id: id,
             slug: slug,
             order: next,
+            user: user,
             title: 'Chapter '+next,
             content: '',
             createdAt: createdAt,

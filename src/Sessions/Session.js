@@ -9,6 +9,7 @@ export default class Manuscript extends React.Component {
         if(started === true) {
             let session = {
                 _id:"Session:"+openTime.getTime(),
+                user: this.context.user.username,
                 currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
                 documentId: document._id,

@@ -1,6 +1,6 @@
 import React from 'react'
 import DB from './Storage/db'
-import PouchDB from 'pouchdb'
+import firestoreDB from './Storage/firestoreDB'
 import { auth } from './Storage/firebase'
 
 
@@ -21,19 +21,14 @@ class AuthProvider extends React.Component {
       auth.onAuthStateChanged(function (user) { 
         let name = user?user.email:'Anonymous'
         let anonymous = user?false:true
+        let database = user? new firestoreDB(name) : new DB(name)
         this.setState({
           ...this.state,
           isAnonymous: anonymous,
           user: {
             username: name
           },
-          db:new DB(name)
-        }, () => {
-          /*let remoteRB = new PouchDB('http://hallofbrightcarvings.com.au:5984/test')
-          let info = remoteRB.info()
-          console.log(info)
-          this.state.db.sync(remoteRB)
-          console.log('syncing', remoteRB)*/
+          db:database
         })
       }.bind(this))
     }

@@ -46,7 +46,9 @@ export default class DB {
     async getDocument(slug) {
         const item = await this.db.allDocs({startkey: "Document:"+slug,include_docs: true, limit:1});
         let document = {}
-        document = item.rows[0].doc
+        if(item && item.rows && item.rows.length>=1) {
+            document = item.rows[0].doc
+        }
         return document;
     }
     async createSession(session) {

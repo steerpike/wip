@@ -34,7 +34,10 @@ export default class Document extends React.Component {
         this._isMounted = true;
         if(this._isMounted) {
             let document = await db.getDocument(slug)
-            this._isMounted && this.setState({
+            this._isMounted && 
+            Object.entries(document).length !== 0 && 
+            document.constructor === Object && 
+            this.setState({
                 document
             })
         }
@@ -102,6 +105,10 @@ export default class Document extends React.Component {
         const db = this.context.db;
         try {
         let result = await db.updateDocumentForManuscript(this.state.document)
+        if(result===undefined || typeof(result.rev) === undefined) {
+            result = {}
+            result.rev = 0;
+        }
         this.setState(prevState => (
             {
                 document: {

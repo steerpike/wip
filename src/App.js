@@ -24,6 +24,7 @@ export default class App extends React.Component {
     manuscript.updatedAt = new Date().getTime()
     let slug = manuscript.createdAt
     manuscript.slug = slug
+    manuscript.user = this.context.user.username;
     manuscript['_id'] = "Manuscript:"+slug
     await db.createManuscript(manuscript)
     return slug;

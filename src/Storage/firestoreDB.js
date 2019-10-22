@@ -118,6 +118,10 @@ export default class firestoreDB {
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 sessions[doc.id] = doc.data()
+                //normalise firestore dates to the same as pouchdb
+                sessions[doc.id].opened = sessions[doc.id].opened.toDate()
+                sessions[doc.id].startTypeTime = sessions[doc.id].startTypeTime.toDate()
+                sessions[doc.id].finished = sessions[doc.id].finished.toDate()
             })
         })
         return sessions;

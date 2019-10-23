@@ -132,6 +132,7 @@ export default class firestoreDB {
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
                 sprints[doc.id] = doc.data()
+                sprints[doc.id].startTime = sprints[doc.id].startTime.toDate()
             })
         })
         return sprints;

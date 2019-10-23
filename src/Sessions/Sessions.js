@@ -4,22 +4,21 @@ import moment from 'moment';
 
 export default class Sessions extends React.Component {
   static contextType = AuthContext
-  state = {
-    sessions: {}
-  }
+  /*
   async componentDidMount() {
-    const db = this.context.db;
+    //const db = this.context.db;
     this._isMounted = true;
     if(this._isMounted) {
-      const sessions = await db.getAllSessions()
+      const sessions = this.context.sessions
+      console.log(sessions)
       this._isMounted && this.setState({
         sessions
       })
     }
-  }
+  }*/
   
   render() {
-    const sessions = Object.values(this.state.sessions)
+    const sessions = Object.values(this.context.sessions)
     return (
       <div>
         <h2>Recent Sessions</h2>

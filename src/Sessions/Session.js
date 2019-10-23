@@ -20,6 +20,7 @@ export default class Manuscript extends React.Component {
                 startTypeTime: startTypeTime
             }
             await db.createSession(session)
+            this.context.syncSessions()
         }
         
     }

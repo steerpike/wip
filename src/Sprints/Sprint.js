@@ -3,13 +3,18 @@ import { AuthContext } from '../AuthContext'
 
 export default class Sprint extends React.Component {
     static contextType = AuthContext
+    _isMounted = false;
     state = {
         startTime: null,
         targetGoal: 0,
         currentTargetValue: 0,
         completed: false
     }
+    componentDidMount() {
+        this._isMounted = true;
+    }
     async componentWillUnmount() {
+        this._isMounted = false;
         this.endSprint();
     }
     saveSprint = async (sprint) => {
@@ -19,7 +24,7 @@ export default class Sprint extends React.Component {
     }
     createNewSprint = async (goal) => {
         this.setState({
-            startTime: new Date().getTime(),
+            startTime: new Date(),
             targetGoal: goal
         }, this.startSprint())
     }
@@ -41,11 +46,16 @@ export default class Sprint extends React.Component {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
         if(this.state.startTime != null) {
-            let { words, startingWordCount, openTime, startTypeTime, document, currentWordCount } = this.props.values;
+            let { startingWordCount, openTime, startTypeTime, document, currentWordCount } = this.props.values;
+            if(startTypeTime === undefined) {
+                startTypeTime = this.state.startTime
+            }
+            if(currentWordCount === 0) {
+                currentWordCount = startingWordCount
+            }
             let sprint = {
                 _id: "Sprint:" + openTime.getTime(),
                 user: this.context.user.username,
-                words: words,
                 currentWordCount: currentWordCount,
                 startingWordCount: startingWordCount,
                 documentId: document._id,
@@ -57,18 +67,24 @@ export default class Sprint extends React.Component {
                 completed: this.state.completed,
             }
             await this.saveSprint(sprint)
-            this.setState({
-                startTime: null,
-                targetGoal: 0,
-                currentTargetValue: 0,
-                completed: false
-            })
+            this.context.syncSprints()
+            if (this._isMounted) {
+                this.setState({
+                    startTime: null,
+                    targetGoal: 0,
+                    currentTargetValue: 0,
+                    completed: false
+                })
+            }
         }
         
     }
     render() {
         
         let {targetGoal, currentTargetValue, startTime, completed} = this.state;
+        if(startTime !== undefined && startTime !== null) {
+            startTime = startTime.toString()
+        }
         return  (
         <div>
             <h3>Current Sprint</h3>

@@ -4,9 +4,7 @@ import moment from 'moment';
 
 export default class Sprints extends React.Component {
   static contextType = AuthContext
-  state = {
-    sprints: {}
-  }
+  /*
   async componentDidMount() {
     const db = this.context.db;
     this._isMounted = true;
@@ -16,10 +14,10 @@ export default class Sprints extends React.Component {
         sprints
       })
     }
-  }
+  }*/
   
   render() {
-    const sprints = Object.values(this.state.sprints)
+    const sprints = Object.values(this.context.sprints)
     return (<div>
       <h2>Recent Sprints</h2>
       <table className="w-full border">

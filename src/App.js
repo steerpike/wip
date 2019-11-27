@@ -30,11 +30,12 @@ export default class App extends React.Component {
     return slug;
   }
   render() {
+    const isMenuOpen = false;
     return (
       
       <div>
           <Router>
-          <Header />
+          <Header isMenuOpen={isMenuOpen} />
           <div className="container mx-auto bg-gray-100">
             <Switch>
               <Route path="/login" component={Login} />

@@ -662,11 +662,10 @@ h5 { font-size: 1.25rem;
 h6 { font-size: 1.125rem;
 }
 
-a { color: #2d3748;
-}
-
-a:hover { color: #718096; border-bottom-width: 1px; border-color: #718096;
-}
+/*
+a { @apply text-gray-800; }
+a:hover { @apply text-gray-600 border-b border-gray-600; }
+*/
 
 .button,
 button,

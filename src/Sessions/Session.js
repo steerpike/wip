@@ -25,19 +25,9 @@ export default class Manuscript extends React.Component {
         
     }
     render() {
-        let {currentWordCount, startingWordCount, started, openTime, startTypeTime} = this.props.values;
-        let startTimeString = ''
-        if(startTypeTime !== undefined) {
-            startTimeString = startTypeTime.toString()
-        }
+ 
         return  (
         <div>
-            <h3>Current Session</h3>
-            <p>Starting word count: { startingWordCount }</p>
-            <p>Current word count: { currentWordCount }</p>
-            <p>Begun typing: {started.toString()}</p>
-            <p>Open time: {openTime.toString()}</p>
-            <p>Start time: {startTimeString}</p>
         </div>)
     }
   

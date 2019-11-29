@@ -81,23 +81,14 @@ export default class Sprint extends React.Component {
     }
     render() {
         
-        let {targetGoal, currentTargetValue, startTime, completed} = this.state;
-        if(startTime !== undefined && startTime !== null) {
-            startTime = startTime.toString()
-        }
         return  (
-        <div>
-            <h3>Current Sprint</h3>
-            <p>Started: {startTime}</p>
-            <p>Target: {targetGoal}</p>
-            <p>Current: {currentTargetValue}</p>
-            <p>Completed: {completed}</p>
-            <button onClick={() => this.createNewSprint(1)}>1 minute</button>
-            <button onClick={() => this.createNewSprint(10)}>10 minutes</button>
-            <button onClick={() => this.createNewSprint(20)}>20 minutes</button>
-            <button onClick={() => this.createNewSprint(30)}>30 minutes</button>
-            <button onClick={() => this.createNewSprint(60)}>60 minutes</button>
-            <button onClick={() => this.createNewSprint(120)}>120 minutes</button>
+        <div className="max-w-2xl mx-auto">
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(1)}>1<br /> minute</button>
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(10)}>10 minutes</button>
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(20)}>20 minutes</button>
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(30)}>30 minutes</button>
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(60)}>60 minutes</button>
+            <button className="mx-1 rounded-full h-20 w-20 items-center justify-center" onClick={() => this.createNewSprint(120)}>120 minutes</button>
         </div>)
     }
   

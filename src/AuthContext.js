@@ -16,7 +16,8 @@ class AuthProvider extends React.Component {
         db: new DB('Anonymous'),
         error: null,
         sessions: {},
-        sprints: {}
+        sprints: {},
+        title: ""
     }
     constructor(props) {
       super(props)
@@ -39,7 +40,9 @@ class AuthProvider extends React.Component {
       }.bind(this))
       //At this point we likely need to update Manuscripts, Documents, Sessions and Sprints
     }
-    
+    setTitle = (title) => {
+      this.setState({title:title})
+    }
     login = (name,password) => {
       auth.signInWithEmailAndPassword(name, password).catch((error) =>{
         this.setState({error: error.message})
@@ -80,7 +83,9 @@ class AuthProvider extends React.Component {
               sessions: this.state.sessions,
               sprints: this.state.sprints,
               syncSessions: this.syncSessions,
-              syncSprints: this.syncSprints
+              syncSprints: this.syncSprints,
+              title: this.state.title,
+              setTitle:this.setTitle
             }}
           >
             {this.props.children}

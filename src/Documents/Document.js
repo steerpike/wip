@@ -125,15 +125,16 @@ export default class Document extends React.Component {
         const { document } = this.state
         
         if(!document) { return null;}
-        const created = new Date(document.createdAt).toString()
         return (
             <div>
-                <div className="grid grid-cols">
+                <div>
+                    <div>
                     <Session values={this.state} />
+                    </div>
+                    <div>
                     <Sprint values={this.state} />
+                    </div>
                 </div>
-                <h4>{ created }</h4>
-                <p>Seconds since last edit:{this.state.secondsSinceLastEdit}</p>
                 <input type="text" name="title"
                 className="w-full my-2 p-1"
                 defaultValue={document.title} onChange={this.updateTitle} />

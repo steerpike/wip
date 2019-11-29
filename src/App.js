@@ -36,7 +36,7 @@ export default class App extends React.Component {
       <div>
           <Router>
           <Header isMenuOpen={isMenuOpen} />
-          <div className="container mx-auto bg-gray-100">
+          <div className="container mx-auto">
             <Switch>
               <Route path="/login" component={Login} />
               <ProtectedRoute path="/manuscripts/new" component={(props) => <NewManuscript {...props} onSave={this.handleSave } />} />

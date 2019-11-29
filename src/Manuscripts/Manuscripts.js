@@ -16,6 +16,7 @@ class Manuscripts extends Component {
                 manuscripts
             })
         }
+        this.context.setTitle("Manuscripts")
     }
     componentWillUnmount() {
         this._isMounted = false;
@@ -23,7 +24,6 @@ class Manuscripts extends Component {
     render() {
         const manuscripts = Object.values(this.state.manuscripts)
         return (<div>
-            <h2>Manuscripts List</h2>
             { manuscripts.map((m)=>(
                 <div key={m._id}>
                     <Link to={`/manuscripts/${m.slug}`} >{m.title}</Link>

@@ -1,6 +1,8 @@
 import React from 'react';
+import { AuthContext } from '../AuthContext'
 
 export default class NewManuscript extends React.Component {
+    static contextType = AuthContext
     state = {
         manuscript: {
             _id: '',
@@ -10,6 +12,8 @@ export default class NewManuscript extends React.Component {
             createdAt: undefined,
             updatedAt: undefined
         }
+    }
+    componentDidMount() {
     }
     updateValue = (e) => {
         const {manuscript} = this.state;

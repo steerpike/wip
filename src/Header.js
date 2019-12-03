@@ -10,15 +10,15 @@ export default function Header(props) {
     return (
     <header>
         <AuthConsumer>
-        {({ isAnonymous, title }) => (
+        {({ isAnonymous, logout }) => (
         <div>
         <nav className="flex items-center justify-between px-4 py-2"> 
             <div className="leading-none">
                 <span className="uppercase text-sm"><Link to="/">Words<br /> in<br /> Progress<br /></Link></span>
             </div>
-        <div>{title}</div>
+        <div><h1 className="text-sm">title</h1></div>
             <div>
-                <button onClick={toggleMenu} className="block">
+                <button onClick={toggleMenu} className="block" data-test="menuButton">
                     <svg className="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         {!isMenuOpen && 
                             <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
@@ -49,11 +49,16 @@ export default function Header(props) {
                         to="/manuscripts">
                             Manuscripts
                         </Link>
-                        {isAnonymous && 
+                        {isAnonymous ? (
                         <Link 
                         to="/login" className="block mt-1 px-2 py-1">
                             Login
-                        </Link>
+                        </Link>) : (
+                           <button 
+                           data-test="logoutButton"
+                           onClick={logout} className="border-0 mt-1 px-2 py-1">
+                               Logout
+                           </button>) 
                         }
                     </div>
                 }

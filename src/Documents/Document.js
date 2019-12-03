@@ -136,12 +136,14 @@ export default class Document extends React.Component {
                     </div>
                 </div>
                 <input type="text" name="title"
+                data-test="documentTitle"
                 className="w-full my-2 p-1"
                 defaultValue={document.title} onChange={this.updateTitle} />
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     className="min-h-screen w-full border-2 reactQuill"
                     theme="bubble"
+                    data-test="documentContent"
                     value={document.content}
                     onChange={this.updateContent}
                 />

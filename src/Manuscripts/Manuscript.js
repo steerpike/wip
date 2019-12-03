@@ -26,6 +26,7 @@ export default class Manuscript extends React.Component {
             this._isMounted && this.setState({
                 documents
             })
+            
         }
     }
     componentWillUnmount() {

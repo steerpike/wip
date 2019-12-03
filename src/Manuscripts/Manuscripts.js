@@ -16,7 +16,6 @@ class Manuscripts extends Component {
                 manuscripts
             })
         }
-        this.context.setTitle("Manuscripts")
     }
     componentWillUnmount() {
         this._isMounted = false;
@@ -30,7 +29,7 @@ class Manuscripts extends Component {
                 </div>))}
                 <div>
                 <Link 
-                data-test="newManuscriptsLink"
+                data-test="createNewManuscriptsLink"
                 to="/manuscripts/new" key="new">New Manuscript</Link>
                 </div>
         </div>)
